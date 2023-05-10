@@ -1,6 +1,5 @@
 package org.example;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 public class TestSuit extends BaseTest {
@@ -17,6 +16,12 @@ public class TestSuit extends BaseTest {
     Log_InPage log_inPage = new Log_InPage();
     LogInPageDetail logInPageDetail = new LogInPageDetail();
     ReferHTCOneToAFriend referHTCOneToAFriend = new ReferHTCOneToAFriend();
+    FacebookPage facebookPage = new FacebookPage();
+    NewReleaseComments newReleaseComments = new NewReleaseComments();
+    GuestCheckOut guestCheckOut = new GuestCheckOut();
+    CheckOutDetails checkOutDetails = new CheckOutDetails();
+    CreditCardDetails creditCardDetails = new CreditCardDetails();
+
 
     @Test
 
@@ -104,7 +109,7 @@ public class TestSuit extends BaseTest {
         //Enter Log-in detail-email & password, click log-in
         logInPageDetail.enterLogInDetail();
         //click on homepage logo
-      homePage.clickOnHomePageLogo();
+        homePage.clickOnHomePageLogo();
         //click on Good on community poll
         homePage.clickOnGood();
         //click on vote
@@ -112,5 +117,69 @@ public class TestSuit extends BaseTest {
         //verify message
         homePage.verifyRegisteredUserCanVoteSuccessfully();
     }
+
+    @Test
+    public void printOutProductTitle() {
+        //print all products titles
+        homePage.printOutProductTitle();
+
+    }
+
+    @Test
+    public void verifySearchAlert() {
+        homePage.verifySearchAlertMessage();
+    }
+
+    @Test
+    public void verifyAlertMessageWhenUserClickOnVoteWithoutSelectingAnyPollingOption() {
+        //alert message when user try to vote
+        homePage.verifyVoteAlertMessage();
+    }
+
+    @Test
+    public void userShouldAbleToSelectAndVerifyTheCurrencyAccordingly() {
+        //select from drop down currency on homepage & verify currency changed for the products
+        homePage.selectAndVerifyCurrency();
+    }
+
+    @Test
+    public void userShouldAbleToLogOnToFacebookPageSuccessfully() {
+        //click on facebook logo on homepage
+        homePage.clickOnFacebook();
+        //Launching the facebookpage
+        facebookPage.verifyFacebookPage();
+
+    }
+
+    @Test
+    public void verifyUserShouldAbleToCommentOnNewReleaseSuccessfullyAndAppearsAtTheEnd() {
+        //click on new release comment on homepage
+        homePage.clickOnNewReleaseComments();
+        //enter comment on new release page & verify message
+        newReleaseComments.fillDetailsOnNewReleaseComments();
+    }
+
+    @Test
+    public void verifyUserShouldAbleToSearchForGivenProductSuccessfully() {
+        //click on search placeholder,enter product name & click on Search button & verify the search result
+        homePage.searchProduct("Apple");
+
+    }
+
+    @Test
+    public void verifyUserShouldAbleToCheckOutSuccessfullyAsGuest() {
+        //click on product
+        homePage.AddProductToCart();
+        //select product specification
+        guestCheckOut.checkOutAsGuest();
+        //fill in check Out Details
+        checkOutDetails.fillCheckOutDetails();
+        //enter credit card details
+        creditCardDetails.enterCreditCardDetails();
+
+
+    }
+
+
 }
 

@@ -17,8 +17,9 @@ public class AddToCartProductPage extends Utils{
         String name1 = getTextFromElement(_printName);
         System.out.println("Product name before adding to cart: " + name1);
         // add wait until element is invisible & then click on shopping cart
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("content")));
+        waitForInvisibilityOfElement(By.className("content"),20);
+        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        //wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("content")));
         clickOnElement(_shoppingCart);
     }
 }
