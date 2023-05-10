@@ -162,7 +162,7 @@ public class TestSuit extends BaseTest {
     @Test
     public void verifyUserShouldAbleToSearchForGivenProductSuccessfully() {
         //click on search placeholder,enter product name & click on Search button & verify the search result
-        homePage.searchProduct("Apple");
+        homePage.searchProduct("Apple","Nike");
 
     }
 

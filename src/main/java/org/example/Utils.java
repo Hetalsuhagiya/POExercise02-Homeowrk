@@ -1,9 +1,11 @@
 package org.example;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -63,6 +65,17 @@ public class Utils extends BasePage{
     }
     public static boolean isElementDisplayed(By by){
         return driver.findElement(by).isDisplayed();
+    }
+    public static void acceptAlert(String text){
+        Alert alert = driver.switchTo().alert();
+        Assert.assertEquals(alert.getText(),text);
+        alert.accept();
+    }
+
+    public static void dismissAlert(String text){
+        Alert alert = driver.switchTo().alert();
+        Assert.assertEquals(alert.getText(),text);
+        alert.dismiss();
     }
 }
 

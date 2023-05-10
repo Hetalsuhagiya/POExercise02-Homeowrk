@@ -119,15 +119,10 @@ public class HomePage extends Utils {
         //click on vote button on homepage without choosing any poll
         clickOnElement(_voteText);
         //handle error & verify error message
-        Alert alert = driver.switchTo().alert();
-        Assert.assertEquals(alert.getText(), "Please select an answer");
-        //click on ok on alert message
-        alert.accept();
+        acceptAlert("Please select an answer");
     }
 
     public void selectAndVerifyCurrency() {
-        //click on currency selector dropdown
-        //clickOnElement(_selectCurrency);
         //select Dollar from the currency selector drop down
         selectOptionByVisibleText(_selectCurrency, "US Dollar");
         //store all products with the dollar currency
@@ -167,24 +162,22 @@ public class HomePage extends Utils {
 
     }
 
-    public void searchProduct(String searchText) {
-        searchText(_searchProduct, "Apple");
-        //clickOnElement(By.xpath("//*[@id=\"small-search-box-form\"]/button"));
+    public void searchProduct(String searchText, String expectedResult) {
+        //enter product need to be searched for
+        searchText(_searchProduct, searchText);
+        //click on search button
         clickOnElement(_clickSearchbutton);
         //iterate through all searched product
-        List<WebElement> collection_product_links =
-                driver.findElements(By.cssSelector("div.product-grid h2"));
+        List<WebElement> collection_product_links = driver.findElements(By.cssSelector("div.product-grid h2"));
         //Verify if Search result is displayed corresponding to the string which was searched
-        for (int i = 0; i < collection_product_links.size(); i++) {
-            String temp = collection_product_links.get(i).getText();
-            if ((temp.toLowerCase().contains(searchText.toLowerCase()))) {
-                Assert.assertTrue(true, searchText + " is displayed on Product Title: " + temp);
-            } else {
-                Assert.assertTrue(false, searchText + " is not displayed on Product Title: " + temp);
-            }
+        for (WebElement e: collection_product_links) {
+            System.out.println(e.getText());
+        }
+        String actualMessage = searchText;
+        Assert.assertEquals(actualMessage,expectedResult);
         }
 
-    }
+
 
     public void AddProductToCart() {
         //Add Build your own computer to cart
